@@ -8,12 +8,24 @@ class BlogController extends Controller
 {
     public function index()
     {
-        return "Blog";
+        $post = (object)[
+            'id' => 132,
+            'title' => 'lorem ipsum title',
+            'content' => 'lorem ipsum <strong>content</strong>',
+        ];
+        $posts = array_fill(0, 10, $post);
+
+        return view('blog.index', compact('posts'));
     }
 
-    public function show(string $post)
+    public function show(string $post_id)
     {
-        return "Blog post #{$post}";
+        $post = (object)[
+            'id' => 132,
+            'title' => 'lorem ipsum title',
+            'content' => 'lorem ipsum <strong>content</strong>',
+        ];
+        return view('blog.show', compact('post'));
     }
 
     public function like(string $post)
