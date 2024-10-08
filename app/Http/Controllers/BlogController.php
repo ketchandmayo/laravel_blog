@@ -13,7 +13,7 @@ class BlogController extends Controller
             'title' => 'lorem ipsum title',
             'content' => 'lorem ipsum <strong>content</strong>',
         ];
-        $posts = array_fill(0, 10, $post);
+        $posts = array_fill(0, 40, $post);
 
         return view('blog.index', compact('posts'));
     }

@@ -12,7 +12,7 @@
 <div class="text—center min—vh—100 d—flex flex—column justify—content—between">
     @include('includes.header')
 
-    <main class="container py-5">
+    <main class="text-center container py-5 mt-5">
         @yield('content')
     </main>
 
