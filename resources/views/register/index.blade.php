@@ -2,7 +2,5 @@
 
 @section('page.title', 'Страница регистрации')
 @section('content')
-    <h1>
-        Регистрация
-    </h1>
+    <x-register-form></x-register-form>
 @endsection

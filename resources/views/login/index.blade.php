@@ -2,7 +2,5 @@
 
 @section('page.title', 'Страница входа')
 @section('content')
-    <h1>
-        Вход
-    </h1>
+    <x-login-form></x-login-form>
 @endsection

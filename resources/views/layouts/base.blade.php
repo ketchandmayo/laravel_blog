@@ -7,12 +7,16 @@
     <title>@yield('page.title', config('app.name'))</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <style>
+        .container { max-width: 1080px; }
+        .required:after { content: '*'; color: red; margin-left: 3px; }
+    </style>
 </head>
 <body>
 <div class="text—center min—vh—100 d—flex flex—column justify—content—between">
     @include('includes.header')
 
-    <main class="text-center container py-5 mt-5">
+    <main class="container py-5 mt-5">
         @yield('content')
     </main>
 
