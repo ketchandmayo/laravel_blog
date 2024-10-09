@@ -7,6 +7,7 @@
     <title>@yield('page.title', config('app.name'))</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    @stack('css')
     <style>
         .container { max-width: 1080px; }
         .required:after { content: '*'; color: red; margin-left: 3px; }
@@ -24,5 +25,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"></script>
+
+@stack('js')
 </body>
 </html>

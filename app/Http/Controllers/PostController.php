@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class PostController extends Controller
 {
     public function index()
     {
-        return 'index';
+        $post = (object)[
+            'id' => 132,
+            'title' => 'lorem ipsum title',
+            'content' => 'lorem ipsum <strong>content</strong>',
+        ];
+        $posts = array_fill(0, 40, $post);
+
+        return view('user.posts.index', compact('posts'));
     }
 
     public function create()
     {
-        return 'create';
+        return view('user.posts.create');
     }
 
     public function store()
@@ -21,14 +26,20 @@ class PostController extends Controller
         return 'store';
     }
 
-    public function show()
+    public function show($post_id)
     {
-        return 'show';
+        $post = (object)[
+            'id' => 132,
+            'title' => 'lorem ipsum title',
+            'content' => 'lorem ipsum <strong>content</strong>',
+        ];
+
+        return view('user.posts.show', compact('post'));
     }
 
-    public function edit()
+    public function edit($post_id)
     {
-        return 'edit';
+        return view('user.posts.edit', compact('post'));
     }
 
     public function update()

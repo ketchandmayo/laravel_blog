@@ -7,12 +7,16 @@
         {{$post->title}}
 
         <x-slot name="link">
-            <a href="{{route('blog')}}">
+            <a href="{{route('user.posts')}}">
                 {{__('Назад')}}
             </a>
         </x-slot>
+
     </x-title>
 
     {!! $post->content !!}
+    <div class="small text-muted mt-3">
+        {{ now()->format('d.m.Y H:i') }}
+    </div>
 
 @endsection
