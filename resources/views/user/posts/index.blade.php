@@ -19,17 +19,16 @@
             </div>
         @else
             @foreach($posts as $post)
-                <div class="mb-5">
-                    <h2 class="h6 m-0">
-                        <a href="{{ route('user.posts.show', $post->id) }}">
-                            {{ $post->title }}
-                        </a>
-                    </h2>
-                    <div class="small text-muted">
-                        {{ now()->format('d.m.Y H:i') }}
+                    <div class="mb-5">
+                        <h2 class="h6 m-0">
+                            <a href="{{ route('user.posts.show', $post->id) }}">
+                                {{ $post->title }}
+                            </a>
+                        </h2>
+                        <div class="small text-muted">
+                            {{ now()->format('d.m.Y H:i') }}
+                        </div>
                     </div>
-                </div>
-
             @endforeach
         @endif
     </div>

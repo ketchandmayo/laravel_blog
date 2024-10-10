@@ -12,6 +12,12 @@
             </a>
         </x-slot>
 
+        <x-slot name="right">
+            <x-button-link href="{{route('user.posts.edit', $post->id)}}">
+                Редактировать пост
+            </x-button-link>
+        </x-slot>
+
     </x-title>
 
     {!! $post->content !!}
