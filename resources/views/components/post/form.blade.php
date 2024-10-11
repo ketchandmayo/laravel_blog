@@ -1,7 +1,9 @@
 @props([
     'action' => '',
     'method' => 'POST',
-    'post' => null,
+    'post' => (object)[
+        'title' => '',
+        'content' => '',],
 ])
 
 <x-form action="{{ $action }}" method="{{ $method }}">
