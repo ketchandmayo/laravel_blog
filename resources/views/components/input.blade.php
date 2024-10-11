@@ -1,1 +1,1 @@
-<input {{ $attributes }} type="text" class="form-control" >
+<input {{ $attributes }} type="text" class="form-control" />

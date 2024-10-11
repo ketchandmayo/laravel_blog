@@ -6,7 +6,8 @@
         'content' => '',],
 ])
 
-<x-form action="{{ $action }}" method="{{ $method }}">
+<x-form action="{{ $action }}" method="POST">
+    @method(strtoupper($method))
     <x-form-item>
         <x-label required>{{__('Название поста')}}</x-label>
         <x-input name="title" value="{{$post->title ?? ''}}" autofocus />

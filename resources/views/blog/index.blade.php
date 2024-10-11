@@ -6,6 +6,8 @@
         Список постов
     </x-title>
 
+    @include('components.blog.filter')
+
     <div class="row">
         @if(empty($posts))
             <div class="row ms-1">

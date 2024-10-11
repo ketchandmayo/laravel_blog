@@ -1,6 +1,7 @@
 <?php
-use App\Http\Controllers\PostController;
+
 use App\Http\Controllers\Posts\CommentController;
+use App\Http\Controllers\Posts\PostController;
 use Illuminate\Support\Facades\Route;
 
 //Route::prefix('user')->middleware(['active', 'auth'])->as('user.')->group(function () {

@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\Posts\CommentController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;

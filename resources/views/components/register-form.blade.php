@@ -32,10 +32,10 @@
                 </x-form-item>
                 <x-form-item >
                     <x-label required>{{__('Повторить пароль')}}</x-label>
-                    <x-input type="password" name="password_conf" />
+                    <x-input type="password" name="password_confirmation" />
                 </x-form-item>
                 <x-form-item>
-                    <x-checkbox name="remember">
+                    <x-checkbox name="agree">
                         {{__('Я согласен на все')}}
                     </x-checkbox>
                 </x-form-item>

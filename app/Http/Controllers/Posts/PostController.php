@@ -1,6 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Posts;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -21,9 +24,12 @@ class PostController extends Controller
         return view('user.posts.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        return 'store';
+        $title = $request->input("title");
+        $content = $request->input("content");
+
+        dd($request);
     }
 
     public function show($post_id)
@@ -47,9 +53,12 @@ class PostController extends Controller
         return view('user.posts.edit', compact('post'));
     }
 
-    public function update()
+    public function update(Request $request)
     {
-        return 'update';
+        $title = $request->input("title");
+        $content = $request->input("content");
+
+        dd($request);
     }
 
     public function destroy()
