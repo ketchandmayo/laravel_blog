@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -21,6 +22,11 @@ class RegisterController extends Controller
         $p_confirm  =       $request->input('password_confirmation');
         $agree      = (bool)$request->input('agree');
 
-        dd($data);
+        if(true)
+        {
+            return back()->withInput();
+        }
+
+        return redirect()->route('user.posts');
     }
 }

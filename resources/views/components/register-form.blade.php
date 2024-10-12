@@ -35,7 +35,7 @@
                     <x-input type="password" name="password_confirmation" />
                 </x-form-item>
                 <x-form-item>
-                    <x-checkbox name="agree">
+                    <x-checkbox name="agree" :checked="(bool)old('agree')">
                         {{__('Я согласен на все')}}
                     </x-checkbox>
                 </x-form-item>

@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
-    public function __invoke(): string
+    public function __invoke()
     {
-        return 'Test';
+        return response()->json(['foo' => 'bar']);
     }
 }

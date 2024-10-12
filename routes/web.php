@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\User\LoginController;
+use App\Http\Controllers\User\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
@@ -14,7 +14,8 @@ Route::view('/', 'home.index')->name('home');
 
 Route::redirect('/home', '/');
 
-Route::get('/test', TestController::class)->middleware('token:'.config('app.test_token'));
+//Route::get('/test', TestController::class)->middleware('token:'.config('app.test_token'));
+Route::get('/test', TestController::class);
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');

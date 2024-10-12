@@ -16,7 +16,6 @@
         <x-label required>{{__('Содержание поста')}}</x-label>
         <x-trix name="content" value="{!! $post->content ?? '' !!}"></x-trix>
     </x-form-item>
-    <x-button type="submit" color="success">
-        Создать пост
-    </x-button>
+
+    {{ $slot }}
 </x-form>

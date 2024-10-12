@@ -12,5 +12,9 @@
         </x-slot>
     </x-title>
 
-    <x-post.form action="{{route('user.posts.update', $post->id)}}" method="PUT" :post="$post" />
+    <x-post.form action="{{route('user.posts.update', $post->id)}}" method="PUT" :post="$post">
+        <x-button type="submit" color="success">
+            {{ __('Сохранить') }}
+        </x-button>
+    </x-post.form>
 @endsection

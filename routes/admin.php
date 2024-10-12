@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Posts\CommentController;
-use App\Http\Controllers\Posts\PostController;
+use App\Http\Controllers\User\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware(['active', 'is_admin'])->as('admin.')->group(function () {

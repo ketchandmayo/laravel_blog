@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Posts;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class PostController extends Controller
         $title = $request->input("title");
         $content = $request->input("content");
 
-        dd($request);
+        return redirect()->route('user.posts.show', 132);
     }
 
     public function show($post_id)
@@ -53,12 +53,13 @@ class PostController extends Controller
         return view('user.posts.edit', compact('post'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $post_id)
     {
         $title = $request->input("title");
         $content = $request->input("content");
 
-        dd($request);
+        return redirect()->back();
+//        return redirect()->route('user.posts.show', $post_id);
     }
 
     public function destroy()

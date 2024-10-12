@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -11,7 +12,7 @@ class LoginController extends Controller
         return view('login.index');
     }
 
-    public function store(Request $request): never
+    public function store(Request $request)
     {
         $data       =       $request->all();
 
@@ -19,6 +20,6 @@ class LoginController extends Controller
         $password   =       $request->input('password');
         $remember   = (bool)$request->input('remember');
 
-        dd($data);
+        return redirect()->route('user.posts');
     }
 }
