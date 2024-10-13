@@ -15,6 +15,7 @@
 </head>
 <body>
 <div class="text—center min—vh—100 d—flex flex—column justify—content—between">
+    @include('includes.alert')
     @include('includes.header')
 
     <main class="container py-5 mt-5">

@@ -7,4 +7,9 @@ if (!function_exists('active_link')) {
     {
         return Route::is($name) ? $class : '';
     }
+
+    function session_alert(string $text, string $type = 'success'): void
+    {
+        session(['alert' => ['text' => $text, 'type' => $type]]);
+    }
 }
