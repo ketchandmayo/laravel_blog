@@ -12,4 +12,9 @@ if (!function_exists('active_link')) {
     {
         session(['alert' => ['text' => $text, 'type' => $type]]);
     }
+
+    function validate(array $attributes, array $rules): array
+    {
+        return validator($attributes, $rules)->validate();
+    }
 }

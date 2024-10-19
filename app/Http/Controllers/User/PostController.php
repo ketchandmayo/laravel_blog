@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\StorePostRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
@@ -21,13 +23,23 @@ class PostController extends Controller
 
     public function create()
     {
+
         return view('user.posts.create');
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         $title = $request->input("title");
         $content = $request->input("content");
+
+        $validated = $request->validated();
+
+//        if(true)
+//        {
+//            throw ValidationException::withMessages([
+//                'account' => __('Недостаточно средств'),
+//            ]);
+//        }
 
         return redirect()->route('user.posts.show', 132);
     }
@@ -57,6 +69,11 @@ class PostController extends Controller
     {
         $title = $request->input("title");
         $content = $request->input("content");
+
+        $validated = $request->validate([
+            'title' => ['required', 'string', 'max:100'],
+            'content' => ['required', 'string', 'max:5000'],
+        ]);
 
         return redirect()->back();
 //        return redirect()->route('user.posts.show', $post_id);

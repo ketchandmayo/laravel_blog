@@ -2,7 +2,8 @@
     'name' => 'test',
     'value' => '',
 ])
-<input id="{{$name}}" value="{!! $value !!}" type="hidden" name="{{$name}}">
+
+<input id="{{$name}}" value="{!! old($name) ?? $value !!}" type="hidden" name="{{$name}}">
 <trix-editor input="{{$name}}"></trix-editor>
 
 @once
