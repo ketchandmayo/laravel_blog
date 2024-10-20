@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Rules\Phone;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
@@ -14,18 +16,16 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        $data       =       $request->all();
+        $request->validate([
+            "name" => ['required', 'string', 'min:3', 'max:255'],
+            "email" => ['required', 'string', 'email', 'max:255'],
+            "phone" => ['required', 'string', new Phone],
+            "password" => ['required', 'string', 'confirmed', Password::min(8)->max(255)->letters()->numbers()->mixedCase()],
+            "password_confirmation" => ['required', 'string', 'min:8', 'max:255'],
+            "agree" => ['accepted'],
+        ]);
 
-        $name       =       $request->input('name');
-        $email      =       $request->input('email');
-        $password   =       $request->input('password');
-        $p_confirm  =       $request->input('password_confirmation');
-        $agree      = (bool)$request->input('agree');
-
-        if(true)
-        {
-            return back()->withInput();
-        }
+        dump($request->all());
 
         return redirect()->route('user.posts');
     }

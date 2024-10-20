@@ -21,23 +21,33 @@
                 <x-form-item>
                     <x-label required>{{__('Имя')}}</x-label>
                     <x-input type="text" name="name" autofocus />
+                    <x-error name="name" />
                 </x-form-item>
                 <x-form-item>
                     <x-label required>{{__('Email')}}</x-label>
                     <x-input type="email" name="email" />
+                    <x-error name="email" />
+                </x-form-item>
+                <x-form-item>
+                    <x-label required>{{__('Номер телефона')}}</x-label>
+                    <x-input type="text" name="phone" value="+712345678" />
+                    <x-error name="phone" />
                 </x-form-item>
                 <x-form-item>
                     <x-label required>{{__('Пароль')}}</x-label>
                     <x-input type="password" name="password" />
+                    <x-error name="password" />
                 </x-form-item>
-                <x-form-item >
-                    <x-label required>{{__('Повторить пароль')}}</x-label>
+                <x-form-item>
+                    <x-label required>{{__('Повторите пароль')}}</x-label>
                     <x-input type="password" name="password_confirmation" />
+                    <x-error name="password_confirmation" />
                 </x-form-item>
                 <x-form-item>
                     <x-checkbox name="agree" :checked="(bool)old('agree')">
                         {{__('Я согласен на все')}}
                     </x-checkbox>
+                    <x-error name="agree" />
                 </x-form-item>
                 <x-button type="submit" color="success">
                     {{__('Регистрация')}}

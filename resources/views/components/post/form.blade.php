@@ -9,6 +9,9 @@
 {{ session('message') }}
 
 <x-form action="{{ $action }}" method="POST">
+    @unless($method == 'GET')
+        @csrf
+    @endif
     @method(strtoupper($method))
     <x-form-item>
         <x-label required>{{__('Название поста')}}</x-label>
