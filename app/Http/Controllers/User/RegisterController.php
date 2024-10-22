@@ -13,7 +13,6 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        dd(Currency::first());
         return view('register.index');
     }
 
