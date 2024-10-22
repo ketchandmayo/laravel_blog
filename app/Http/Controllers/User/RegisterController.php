@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Currency;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
     public function index()
     {
+        $currency = Currency::first();
+        dd($currency);
         return view('register.index');
     }
 
