@@ -23,4 +23,8 @@ class Post extends Model
       'published' => 'boolean',
       'published_at' => 'datetime',
     ];
+
+    protected $attributes = [
+        'published' => false,
+    ];
 }
