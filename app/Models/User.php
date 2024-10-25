@@ -49,4 +49,9 @@ class User extends Authenticatable
             'admin' => 'boolean',
         ];
     }
+
+    protected $attributes = [
+        'active' => true,
+        'admin' => false,
+    ];
 }

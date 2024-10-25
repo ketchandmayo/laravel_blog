@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StorePostRequest;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -29,10 +31,14 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $title = $request->input("title");
-        $content = $request->input("content");
 
         $validated = $request->validated();
+
+        $post = Post::query()->create(
+            array_merge($validated, [
+              'user_id' => User::first()->id,
+            ])
+        );
 
 //        if(true)
 //        {

@@ -24,6 +24,8 @@ class StorePostRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:100'],
             'content' => ['required', 'string', 'max:5000'],
+            'published' => ['nullable', 'boolean'],
+            'published_at' => ['nullable', 'date', 'after_or_equal:now'],
         ];
     }
 }
