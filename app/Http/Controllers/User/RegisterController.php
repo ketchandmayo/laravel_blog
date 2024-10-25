@@ -20,20 +20,14 @@ class RegisterController extends Controller
     {
         $validated = $request->validate([
             "name" => ['required', 'string', 'min:3', 'max:255'],
-            "email" => ['required', 'string', 'email', 'max:255'], /* , 'unique:users' */
+            "email" => ['required', 'string', 'email', 'max:255', 'unique:users'],
 //            "phone" => ['required', 'string', new Phone],
             "password" => ['required', 'string', 'confirmed', Password::min(8)->max(255)], /*->letters()->numbers()->mixedCase()*/
             "password_confirmation" => ['required', 'string', 'min:8', 'max:255'],
             "agree" => ['accepted'],
         ]);
 
-        $user = new User();
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-        $user->password = $validated['password'];
-        $user->save();
-
-        dd($request->all());
+        $user = User::query()->create($validated);
 
         return redirect()->route('user.posts');
     }
