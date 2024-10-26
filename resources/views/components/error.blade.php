@@ -2,9 +2,9 @@
     'name' => ''
 ])
 
-@if($errors->has($name)) @endiferror($name)
+@if($errors->has($name))
     <div class="small text-danger pt-1" id="{{ $name }}">
-        {{ $message }}
+        {{ $errors->first($name) }}
     </div>
 @else
     <span class="error small text-danger pt-1" id="{{ $name }}"></span>

@@ -12,7 +12,7 @@
         </x-slot>
     </x-title>
 
-    <x-post.form action="{{route('user.posts.store')}}" method="POST">
+    <x-post.form action="{{ route('user.posts.store') }}" method="POST">
         <x-button type="submit" color="success">
             {{ __('Создать пост') }}
         </x-button>

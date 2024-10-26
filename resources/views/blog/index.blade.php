@@ -26,10 +26,4 @@
 
         {{ $posts->links() }}
     </div>
-
-    <script type="module">
-        ajaxRequest('GET', '{{ route('home') }}', {}, function(response) {
-            console.log('Успех:', response);
-        });
-    </script>
 @endsection
