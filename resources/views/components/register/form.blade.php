@@ -17,7 +17,7 @@
             </div>
         </x-card-header>
         <x-card-header>
-            <x-form action="{{ route('register.store') }}" method="POST">
+            <x-form method="POST" id="login">
                 <x-form-item>
                     <x-label required>{{__('Имя')}}</x-label>
                     <x-input type="text" name="name" autofocus />
@@ -56,3 +56,9 @@
         </x-card-header>
     </x-card>
 </x-auth>
+
+@push('js')
+    <script type="module">
+        ajaxRedirectForm('login', '{{ route('register.store') }}')
+    </script>
+@endpush
