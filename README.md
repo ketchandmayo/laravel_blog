@@ -1,3 +1,33 @@
+# Installation
+
+To install the project, run the following commands:
+
+1. Install PHP dependencies:
+    ```bash
+    composer install
+    ```
+
+2. Install JavaScript dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Start the development environment:
+
+    ```bash
+    ./vendor/bin/sail up
+    ```
+4. Start Vite
+    ```bash
+    npm run dev
+    ```
+   or
+    ```bash
+    npm run build
+    ```
+   for prod enviroment
+
 # Laravel Docker Sail: Resolving Permission Issues and Database Connection Errors
 
 This document provides instructions for resolving common permission issues and database connection errors in Laravel running with Docker and Sail.
