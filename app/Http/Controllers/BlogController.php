@@ -2,33 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        $data = $request->all();
+        $validated = $request->validate(
+            [
+                'limit' => ['nullable', 'integer', 'min:1', 'max:99'],
+                'page' => ['nullable', 'integer', 'min:1', 'max:100'],
+            ]
+        );
+        $limit = $validated['limit'] ?? 12;
 
         $category_id = $request->input('category_id');
         $search = $request->input('search');
 
-        $post = (object)[
-            'id' => 132,
-            'title' => 'lorem ipsum title',
-            'content' => 'lorem ipsum <strong>content</strong>',
-            'category_id' => 1,
-        ];
-        $posts = array_fill(0, 40, $post);
-        $posts = array_filter($posts, function ($post) use ($search, $category_id) {
-            if($search && !str_contains(strtolower($post->content), strtolower($search)))
-                return false;
-
-            if($category_id && $post->category_id != $category_id)
-                return false;
-
-            return true;
-        });
+        $posts = Post::query()
+            ->where('published', true)
+            ->latest('published_at')
+            ->oldest('id')
+            ->paginate($limit, ['id', 'title', 'content', 'published_at']);
 
         $categories = [null => __('Все категории'), 1 => '1', 2 => '2'];
 

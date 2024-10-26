@@ -25,11 +25,15 @@
                                 {{ $post->title }}
                             </a>
                         </h2>
-                        <div class="small text-muted">
-                            {{ now()->format('d.m.Y H:i') }}
-                        </div>
+
+                        @if($post->published_at)
+                            <div class="small text-muted">
+                                {{ $post->published_at->diffForHumans() }}
+                            </div>
+                        @endif
                     </div>
             @endforeach
+            {{ $posts->links() }}
         @endif
     </div>
 @endsection

@@ -2,12 +2,24 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
     use HasFactory;
+
+    /**
+     * Class Post
+     * @property int    $user_id
+     *
+     * @property string $title
+     * @property string $content
+     *
+     * @property bool   $published
+     * @property Carbon $published_at
+     */
 
     protected $fillable = [
         'user_id',
@@ -20,11 +32,17 @@ class Post extends Model
     ];
 
     protected $casts = [
-      'published' => 'boolean',
-      'published_at' => 'datetime',
+        'user_id' => 'integer',
+        'published' => 'boolean',
+        'published_at' => 'datetime',
     ];
 
     protected $attributes = [
         'published' => false,
     ];
+
+    public function isPublished(): bool
+    {
+        return ($this->published && $this->published_at);
+    }
 }

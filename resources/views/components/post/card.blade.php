@@ -10,9 +10,11 @@
                 {!! $post->content !!}
             </p>
 
-            <div class="small text-muted">
-               {{ now()->format('d.m.Y H:i') }}
-            </div>
+            @if($post->published_at)
+                <div class="small text-muted">
+                   {{ $post->published_at->diffForHumans() }}
+                </div>
+            @endif
         </div>
     </x-card-body>
 </x-card>

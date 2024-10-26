@@ -11,14 +11,19 @@ use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $post = (object)[
-            'id' => 132,
-            'title' => 'lorem ipsum title',
-            'content' => 'lorem ipsum <strong>content</strong>',
-        ];
-        $posts = array_fill(0, 40, $post);
+        $validated = $request->validate(
+            [
+                'limit' => ['nullable', 'integer', 'min:1', 'max:99'],
+                'page' => ['nullable', 'integer', 'min:1', 'max:100'],
+            ]
+        );
+        $limit = $validated['limit'] ?? 12;
+
+        $posts = Post::query()
+            ->latest('published_at')
+            ->paginate($limit);
 
         return view('user.posts.index', compact('posts'));
     }
