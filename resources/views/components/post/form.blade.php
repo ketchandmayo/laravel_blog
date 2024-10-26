@@ -8,11 +8,7 @@
 
 {{ session('message') }}
 
-<x-form action="{{ $action }}" method="POST">
-    @unless($method == 'GET')
-        @csrf
-    @endif
-    @method(strtoupper($method))
+<x-form id="post-form" action="{{ $action }}" method="POST">
     <x-form-item>
         <x-label required>{{__('Название поста')}}</x-label>
         <x-input name="title" value="{{$post->title ?? ''}}" autofocus />
@@ -38,7 +34,11 @@
         <x-error name="published" />
     </x-form-item>
 
-{{--    @include('includes.errors')--}}
-
     {{ $slot }}
 </x-form>
+
+@push('js')
+    <script type="module">
+        ajaxRedirectForm('post-form', '{{ $action }}')
+    </script>
+@endpush

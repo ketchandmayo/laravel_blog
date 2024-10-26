@@ -45,23 +45,18 @@ class PostController extends Controller
             ])
         );
 
-//        if(true)
-//        {
-//            throw ValidationException::withMessages([
-//                'account' => __('Недостаточно средств'),
-//            ]);
-//        }
+        $data = [
+            'message' => __('Успешно!'),
+            'redirect' => route('user.posts.show', $post->id)
+        ];
 
+        return response()->json($data);
         return redirect()->route('user.posts.show', 132);
     }
 
     public function show($post_id)
     {
-        $post = (object)[
-            'id' => 132,
-            'title' => 'lorem ipsum title',
-            'content' => 'lorem ipsum <strong>content</strong>',
-        ];
+        $post = Post::query()->findOrFail($post_id);
 
         return view('user.posts.show', compact('post'));
     }

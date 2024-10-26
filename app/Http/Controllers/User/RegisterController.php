@@ -31,7 +31,7 @@ class RegisterController extends Controller
         session_alert(__('Добро пожаловать').", {$request->email}", 'info');
 
         $data = [
-            'message' => 'Данные успешно отправлены!',
+            'message' => __('Успешно!'),
             'redirect' => route('user.posts')
         ];
 
