@@ -43,7 +43,6 @@ window.ajaxRequest = function ajaxRequest(method, url, data = {}, successCallbac
 window.ajaxRedirectForm = function ajaxRedirectForm(form_id = '', route = '', method = 'POST') {
     $(`#${form_id}`).on('submit', function() {
         event.preventDefault();
-
         const formData = $(this).serialize();
 
         ajaxRequest(method, route, formData, function (response) {
