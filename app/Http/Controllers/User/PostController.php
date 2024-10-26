@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StorePostRequest;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -51,7 +52,6 @@ class PostController extends Controller
         ];
 
         return response()->json($data);
-        return redirect()->route('user.posts.show', 132);
     }
 
     public function show($post_id)
@@ -63,26 +63,29 @@ class PostController extends Controller
 
     public function edit($post_id)
     {
-        $post = (object)[
-            'id' => 132,
-            'title' => 'lorem ipsum title',
-            'content' => 'lorem ipsum <strong>content</strong>',
-        ];
+        $post = Post::query()->findOrFail($post_id);
         return view('user.posts.edit', compact('post'));
     }
 
-    public function update(Request $request, $post_id)
+    public function update(StorePostRequest $request, $post_id)
     {
-        $title = $request->input("title");
-        $content = $request->input("content");
+        $validated = $request->validated();
+//        $validated['published_at'] = Carbon::parse($validated['published_at'])->format('Y-m-d H:i:s');
 
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:100'],
-            'content' => ['required', 'string', 'max:5000'],
-        ]);
 
-        return redirect()->back();
-//        return redirect()->route('user.posts.show', $post_id);
+        if (!isset($validated['published'])) {
+            $validated['published'] = false;
+        }
+
+        $post = Post::query()->findOrFail($post_id);
+        $post->update($validated);
+
+        $data = [
+            'message' => __('Успешно!'),
+            'redirect' => route('user.posts.show', $post->id)
+        ];
+
+        return response()->json($data);
     }
 
     public function destroy()

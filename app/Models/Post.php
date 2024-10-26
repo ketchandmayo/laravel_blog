@@ -39,6 +39,7 @@ class Post extends Model
 
     protected $attributes = [
         'published' => false,
+        'published_at' => null,
     ];
 
     public function isPublished(): bool

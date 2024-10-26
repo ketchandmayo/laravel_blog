@@ -2,13 +2,16 @@
     'action' => '',
     'method' => 'POST',
     'post' => (object)[
-        'title' => '',
-        'content' => '',],
+        'title' =>          '',
+        'content' =>        '',
+        'published_at' =>   '',
+        'published' =>      null,
+        ],
 ])
 
 {{ session('message') }}
 
-<x-form id="post-form" action="{{ $action }}" method="POST">
+<x-form id="post-form" action="{{ $action }}" method="{{ $method }}">
     <x-form-item>
         <x-label required>{{__('Название поста')}}</x-label>
         <x-input name="title" value="{{$post->title ?? ''}}" autofocus />
@@ -22,13 +25,13 @@
     </x-form-item>
 
     <x-form-item>
-        <x-label required>{{__('Дата публикации')}}</x-label>
-        <x-input name="published_at" value="" placeholder="11.12.2024" />
+        <x-label>{{__('Дата публикации')}}</x-label>
+        <x-input name="published_at" value="" value="{{dateOrNull($post->published_at) ?? ''}}" placeholder="{{ now()->format('d.m.Y') }}" />
         <x-error name="published_at" />
     </x-form-item>
 
     <x-form-item>
-        <x-checkbox name="published">
+        <x-checkbox name="published" checked="{{ checkboxChecked($post->published) }}">
             {{__('Опубликовано')}}
         </x-checkbox>
         <x-error name="published" />
@@ -39,6 +42,6 @@
 
 @push('js')
     <script type="module">
-        ajaxRedirectForm('post-form', '{{ $action }}')
+        ajaxRedirectForm('post-form', '{{ $action }}', '{{ $method }}')
     </script>
 @endpush
