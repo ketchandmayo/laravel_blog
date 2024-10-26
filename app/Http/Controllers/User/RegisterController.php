@@ -28,7 +28,13 @@ class RegisterController extends Controller
         ]);
 
         $user = User::query()->create($validated);
+        session_alert(__('Добро пожаловать').", {$request->email}", 'info');
 
-        return redirect()->route('user.posts');
+        $data = [
+            'message' => 'Данные успешно отправлены!',
+            'redirect' => route('user.posts')
+        ];
+
+        return response()->json($data);
     }
 }
