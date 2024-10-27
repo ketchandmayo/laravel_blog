@@ -20,11 +20,15 @@ class PostController extends Controller
                 'page' => ['nullable', 'integer', 'min:1', 'max:100'],
             ]
         );
-        $limit = $validated['limit'] ?? 12;
+        $limit = $validated['limit'] ?? 7;
 
         $posts = Post::query()
             ->latest('published_at')
             ->paginate($limit);
+
+        if ($request->ajax()) {
+            return view('user.posts.partials_index', compact('posts'))->render();
+        }
 
         return view('user.posts.index', compact('posts'));
     }
@@ -54,14 +58,14 @@ class PostController extends Controller
         return response()->json($data);
     }
 
-    public function show($post_id)
+    public function show($post_id, Request $request)
     {
         $post = Post::query()->findOrFail($post_id);
 
         return view('user.posts.show', compact('post'));
     }
 
-    public function edit($post_id)
+    public function edit($post_id, Request $request)
     {
         $post = Post::query()->findOrFail($post_id);
         return view('user.posts.edit', compact('post'));
@@ -70,8 +74,6 @@ class PostController extends Controller
     public function update(StorePostRequest $request, $post_id)
     {
         $validated = $request->validated();
-//        $validated['published_at'] = Carbon::parse($validated['published_at'])->format('Y-m-d H:i:s');
-
 
         if (!isset($validated['published'])) {
             $validated['published'] = false;

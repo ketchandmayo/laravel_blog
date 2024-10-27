@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('page.title', config('app.name'))</title>
+
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @stack('css')
-
 </head>
 <body>
 <div class="text—center min—vh—100 d—flex flex—column justify—content—between">
@@ -22,5 +22,10 @@
 </div>
 
 @stack('js')
+
+<script>
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-bs-theme', savedTheme);
+</script>
 </body>
 </html>

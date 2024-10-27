@@ -17,27 +17,36 @@ class BlogController extends Controller
         );
         $limit = $validated['limit'] ?? 12;
 
-        $category_id = $request->input('category_id');
+        $user_id = $request->input('user_id');
         $search = $request->input('search');
 
-        $posts = Post::query()
-            ->where('published', true)
+        $query = Post::query();
+        if($user_id)
+            $query->where('user_id', $user_id);
+        $query->where([
+                'published' => true,
+            ])
             ->latest('published_at')
-            ->oldest('id')
-            ->paginate($limit, ['id', 'title', 'content', 'published_at']);
+            ->oldest('id');
 
-        $categories = [null => __('Все категории'), 1 => '1', 2 => '2'];
+        $posts = $query->paginate($limit, ['id', 'title', 'content', 'published_at']);
 
-        return view('blog.index', compact('posts', 'categories'));
+        if ($request->ajax()) {
+            return view('blog.partials_index', compact('posts'))->render();
+        }
+        else {
+            $user_id = Post::query()->distinct()->pluck('user_id')->toArray();
+            $user_id = array_replace([null => __('Все пользователи')], array_combine($user_id, $user_id));
+
+            return view('blog.index', compact('posts', 'user_id'));
+        }
+
+
     }
 
     public function show(string $post_id)
     {
-        $post = (object)[
-            'id' => 132,
-            'title' => 'lorem ipsum title',
-            'content' => 'lorem ipsum <strong>content</strong>',
-        ];
+        $post = Post::query()->findOrFail($post_id);
         return view('blog.show', compact('post'));
     }
 
