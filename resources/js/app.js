@@ -1,9 +1,13 @@
+import './theme.js';
 //<script type="module">
 import 'bootstrap'
 import $ from 'jquery';
-window.$ = window.jQuery = $;
 
+window.$ = window.jQuery = $;
 import './bootstrap';
+
+const savedTheme = localStorage.getItem('theme') || 'light'; // Устанавливаем по умолчанию 'light'
+document.documentElement.setAttribute('data-bs-theme', savedTheme);
 
 window.ajaxRequest = function ajaxRequest(method, url, data = {}, successCallback, errorCallback) {
     $.ajax({
