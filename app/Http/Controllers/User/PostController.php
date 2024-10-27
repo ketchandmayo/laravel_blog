@@ -54,14 +54,14 @@ class PostController extends Controller
         return response()->json($data);
     }
 
-    public function show($post_id)
+    public function show($post_id, Request $request)
     {
         $post = Post::query()->findOrFail($post_id);
 
         return view('user.posts.show', compact('post'));
     }
 
-    public function edit($post_id)
+    public function edit($post_id, Request $request)
     {
         $post = Post::query()->findOrFail($post_id);
         return view('user.posts.edit', compact('post'));
@@ -70,8 +70,6 @@ class PostController extends Controller
     public function update(StorePostRequest $request, $post_id)
     {
         $validated = $request->validated();
-//        $validated['published_at'] = Carbon::parse($validated['published_at'])->format('Y-m-d H:i:s');
-
 
         if (!isset($validated['published'])) {
             $validated['published'] = false;
