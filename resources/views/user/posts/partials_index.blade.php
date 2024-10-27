@@ -15,6 +15,6 @@
         </div>
     @endforeach
 </div>
-<div class="pagination" style="position: sticky; bottom: 0;">
+<div class="pagination">
     {{ $posts->links() }}
 </div>

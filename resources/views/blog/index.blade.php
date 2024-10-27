@@ -14,16 +14,15 @@
                 {{__('Нет ни одного поста')}}
             </div>
         @else
-            <div class="row">
-                @foreach($posts as $post)
-                    <div class="col-12 col-md-4">
-                        <x-post.card :post="$post" />
-                    </div>
-
-                @endforeach
+            <div id="blog-posts-container">
+                @include('blog.partials_index', ['posts' => $posts])
             </div>
-        @endif
 
-        {{ $posts->links() }}
+        @endif
     </div>
 @endsection
+@push('js')
+    <script type="module">
+        ajaxPaginateRequest('blog-posts-container')
+    </script>
+@endpush

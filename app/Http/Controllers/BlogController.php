@@ -28,16 +28,16 @@ class BlogController extends Controller
 
         $categories = [null => __('Все категории'), 1 => '1', 2 => '2'];
 
+        if ($request->ajax()) {
+            return view('blog.partials_index', compact('posts', 'categories'))->render();
+        }
+
         return view('blog.index', compact('posts', 'categories'));
     }
 
     public function show(string $post_id)
     {
-        $post = (object)[
-            'id' => 132,
-            'title' => 'lorem ipsum title',
-            'content' => 'lorem ipsum <strong>content</strong>',
-        ];
+        $post = Post::query()->findOrFail($post_id);
         return view('blog.show', compact('post'));
     }
 
