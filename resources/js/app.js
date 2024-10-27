@@ -1,11 +1,9 @@
 //<script type="module">
+import 'bootstrap'
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 
 import './bootstrap';
-import 'bootstrap'
-
-import $ from 'jquery';
-
-window.$ = window.jQuery = $;
 
 window.ajaxRequest = function ajaxRequest(method, url, data = {}, successCallback, errorCallback) {
     $.ajax({
@@ -57,8 +55,16 @@ window.ajaxPaginateRequest = function ajaxPaginateRequest(target_id) {
         document.addEventListener('click', function(event) {
             if (event.target.closest('.pagination a')) {
                 event.preventDefault();
+
                 let url = event.target.getAttribute('href');
-                ajaxHtmlRequest(url, target_id);
+
+                let urlParams = new URLSearchParams(window.location.search);
+                urlParams.delete('page'); // Удаляем параметр page
+                urlParams = urlParams.toString();
+
+                let fetchUrl = urlParams ? `${url}&${urlParams}` : url
+
+                ajaxHtmlRequest(fetchUrl, target_id, urlParams);
             }
         });
     });

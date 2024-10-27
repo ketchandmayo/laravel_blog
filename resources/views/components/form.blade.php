@@ -5,8 +5,7 @@
 <form {{ $attributes }} method="{{ $method }}" action="{{ $action }}">
     @unless($method == 'GET')
         @csrf
+        @method(strtoupper($method))
     @endif
-    @method(strtoupper($method))
-
     {{ $slot }}
 </form>
