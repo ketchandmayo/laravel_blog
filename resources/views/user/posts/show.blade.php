@@ -7,9 +7,7 @@
         {{$post->title}}
 
         <x-slot name="link">
-            <a href="{{route('user.posts')}}">
-                {{__('Назад')}}
-            </a>
+            <x-previous />
         </x-slot>
 
         <x-slot name="right">

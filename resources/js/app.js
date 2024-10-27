@@ -50,6 +50,35 @@ window.ajaxRedirectForm = function ajaxRedirectForm(form_id = '', route = '', me
         })
     });
 }
+
+window.ajaxPaginateRequest = function ajaxPaginateRequest(target_id) {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Функция обработки кликов по ссылкам пагинации
+        document.addEventListener('click', function(event) {
+            if (event.target.closest('.pagination a')) {
+                event.preventDefault();
+                let url = event.target.getAttribute('href');
+                ajaxHtmlRequest(url, target_id);
+            }
+        });
+    });
+}
+
+window.ajaxHtmlRequest = function ajaxHtmlQuery(url, target_id) {
+    fetch(url, {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById(target_id).innerHTML = data;
+            window.history.pushState(null, null, url);
+        })
+        .catch(error => console.error('Ошибка загрузки:', error));
+}
+
+
 // function ajaxRequest(url, method = 'GET', data = null, successCallback = null, errorCallback = null, timeout = 5000) {
 //     $.ajax({
 //         url: url,

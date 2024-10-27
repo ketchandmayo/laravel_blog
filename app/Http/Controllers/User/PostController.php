@@ -20,11 +20,15 @@ class PostController extends Controller
                 'page' => ['nullable', 'integer', 'min:1', 'max:100'],
             ]
         );
-        $limit = $validated['limit'] ?? 12;
+        $limit = $validated['limit'] ?? 7;
 
         $posts = Post::query()
             ->latest('published_at')
             ->paginate($limit);
+
+        if ($request->ajax()) {
+            return view('user.posts.partials_index', compact('posts'))->render();
+        }
 
         return view('user.posts.index', compact('posts'));
     }
