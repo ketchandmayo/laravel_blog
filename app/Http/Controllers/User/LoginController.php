@@ -4,25 +4,52 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use function Laravel\Prompts\alert;
 
 class LoginController extends Controller
 {
     public function index(Request $request)
     {
-        return view('login.index');
+        return view('user.login.index');
     }
 
     public function store(Request $request)
     {
-        $data       =       $request->all();
+        $validated = $request->validate([
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
+        ]);
 
-        $email      =       $request->input('email');
-        $password   =       $request->input('password');
-        $remember   = (bool)$request->input('remember');
+        $remember = $request->has('remember');
 
-        session_alert(__('Добро пожаловать').", {$email}", 'info');
+        if (Auth::attempt($validated, $remember)) {
+            session_alert(__('Добро пожаловать').", {$validated['email']}", 'success');
+            $data = [
+                'message' => __('Успешно!'),
+                'redirect' => route('user.posts')
+            ];
+            $status = 200;
+        }
+        else {
+            $data = ['errors' => [
+                    'email' => [__('Email или пароль неверен')]
+                ]
+            ];
+            $status = 422;
+        }
+        return response()->json($data, $status);
+    }
 
-        return redirect()->route('user.posts');
+    public function destroy()
+    {
+        Auth::logout();
+
+        $data = [
+            'message' => __('Успешно!'),
+            'redirect' => route('home')
+        ];
+
+        return response()->json($data);
     }
 }

@@ -14,6 +14,7 @@ Route::view('/', 'home.index')->name('home');
 
 Route::redirect('/home', '/');
 
+
 //Route::get('/test', TestController::class)->middleware('token:'.config('app.test_token'));
 Route::get('/test', TestController::class);
 
@@ -27,5 +28,9 @@ Route::middleware('guest')->group(function () {
 
     Route::get('register', [RegisterController::class, 'index'])->name('register');
     Route::post('register', [RegisterController::class, 'store'])->name('register.store');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
 });
 

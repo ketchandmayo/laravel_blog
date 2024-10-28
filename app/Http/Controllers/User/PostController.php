@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
@@ -24,6 +25,7 @@ class PostController extends Controller
 
         $posts = Post::query()
             ->latest('published_at')
+            ->where('user_id', Auth::id())
             ->paginate($limit);
 
         if ($request->ajax()) {
@@ -46,7 +48,7 @@ class PostController extends Controller
 
         $post = Post::query()->create(
             array_merge($validated, [
-              'user_id' => User::first()->id,
+              'user_id' => Auth::id(),
             ])
         );
 
@@ -62,6 +64,9 @@ class PostController extends Controller
     {
         $post = Post::query()->findOrFail($post_id);
 
+        if ($post->user_id !== Auth::id())
+            return back();
+
         return view('user.posts.show', compact('post'));
     }
 
@@ -74,10 +79,7 @@ class PostController extends Controller
     public function update(StorePostRequest $request, $post_id)
     {
         $validated = $request->validated();
-
-        if (!isset($validated['published'])) {
-            $validated['published'] = false;
-        }
+        $validated['published'] = $request->has('published');
 
         $post = Post::query()->findOrFail($post_id);
         $post->update($validated);
