@@ -29,7 +29,7 @@ class RegisterController extends Controller
         ]);
 
         $user = User::query()->create($validated);
-        Auth::login($user);
+        Auth::login($user, true);
         session_alert(__('Добро пожаловать').", {$request->email}", 'success');
 
         $data = [

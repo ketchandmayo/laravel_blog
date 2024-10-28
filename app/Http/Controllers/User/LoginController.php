@@ -21,7 +21,9 @@ class LoginController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($validated)) {
+        $remember = $request->has('remember');
+
+        if (Auth::attempt($validated, $remember)) {
             session_alert(__('Добро пожаловать').", {$validated['email']}", 'success');
             $data = [
                 'message' => __('Успешно!'),

@@ -79,10 +79,7 @@ class PostController extends Controller
     public function update(StorePostRequest $request, $post_id)
     {
         $validated = $request->validated();
-
-        if (!isset($validated['published'])) {
-            $validated['published'] = false;
-        }
+        $validated['published'] = $request->has('published');
 
         $post = Post::query()->findOrFail($post_id);
         $post->update($validated);
