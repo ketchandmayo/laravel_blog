@@ -7,13 +7,14 @@ use App\Models\Currency;
 use App\Models\User;
 use App\Rules\Phone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
     public function index()
     {
-        return view('register.index');
+        return view('user.register.index');
     }
 
     public function store(Request $request)
@@ -28,7 +29,8 @@ class RegisterController extends Controller
         ]);
 
         $user = User::query()->create($validated);
-        session_alert(__('Добро пожаловать').", {$request->email}", 'info');
+        Auth::login($user);
+        session_alert(__('Добро пожаловать').", {$request->email}", 'success');
 
         $data = [
             'message' => __('Успешно!'),

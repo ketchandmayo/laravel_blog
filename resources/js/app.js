@@ -5,9 +5,11 @@ import $ from 'jquery';
 
 window.$ = window.jQuery = $;
 import './bootstrap';
-
-const savedTheme = localStorage.getItem('theme') || 'light'; // Устанавливаем по умолчанию 'light'
+const savedTheme = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-bs-theme', savedTheme);
+setTimeout(function() {
+    $('#alert').fadeOut(1000); // Исчезновение за 1 секунду (1000 миллисекунд)
+}, 3000);
 
 window.ajaxRequest = function ajaxRequest(method, url, data = {}, successCallback, errorCallback) {
     $.ajax({
@@ -35,7 +37,7 @@ window.ajaxRequest = function ajaxRequest(method, url, data = {}, successCallbac
                         $(`#${key}.error`).text(value[0]);// Отображаем первую ошибку для каждого поля
                     }
                 } else {
-                    alert('Произошла ошибка. Пожалуйста, попробуйте еще раз.'); // Общая ошибка
+                    console.error(jqXHR + textStatus + errorThrown); // Общая ошибка
                 }
             }
         }
@@ -87,25 +89,3 @@ window.ajaxHtmlRequest = function ajaxHtmlQuery(url, target_id) {
         })
         .catch(error => console.error('Ошибка загрузки:', error));
 }
-
-
-// function ajaxRequest(url, method = 'GET', data = null, successCallback = null, errorCallback = null, timeout = 5000) {
-//     $.ajax({
-//         url: url,
-//         method: method,
-//         data: data,
-//         dataType: 'json',
-//         timeout: timeout,
-//         success: function (response) {
-//             if (successCallback && typeof successCallback === 'function') {
-//                 successCallback(response);
-//             }
-//         },
-//         error: function (xhr) {
-//             if (errorCallback && typeof errorCallback === 'function') {
-//                 errorCallback(xhr);
-//             } else {
-//                 console.error('Ошибка AJAX:', xhr.responseText);
-//             }
-//         }
-//     });}
