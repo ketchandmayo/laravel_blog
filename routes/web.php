@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\User\LoginController;
 use App\Http\Controllers\User\RegisterController;
+use App\Http\Controllers\User\ThemeController;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
@@ -21,6 +22,7 @@ Route::get('/test', TestController::class);
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
 Route::post('/blog/{post}/like', [BlogController::class, 'like'])->name('blog.like');
+Route::post('change_theme', [ThemeController::class, 'changeTheme'])->name('changeTheme');
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [LoginController::class, 'index'])->name('login');
