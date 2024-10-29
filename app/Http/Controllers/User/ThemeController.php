@@ -4,15 +4,16 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class ThemeController extends Controller
 {
     function changeTheme(Request $request)
     {
-        if(session('theme') == 'light')
-            session(['theme' => 'dark']);
-        else
-            session(['theme' => 'light']);
+        Cookie::get('theme') == 'dark' ?
+            Cookie::queue('theme', 'light')
+            :
+            Cookie::queue('theme', 'dark');
 
         return response('', 204);
     }

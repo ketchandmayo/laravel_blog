@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
 class ThemeMiddleware
@@ -15,7 +16,7 @@ class ThemeMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $theme = session('theme', 'light');
+        $theme = Cookie::get('theme', 'light');
         view()->share('theme', $theme);
         view()->share('theme_icon', ($theme == 'light' ? 'fa-moon' : 'fa-sun'));
 
