@@ -5,8 +5,6 @@ import $ from 'jquery';
 
 window.$ = window.jQuery = $;
 import './bootstrap';
-const savedTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-bs-theme', savedTheme);
 setTimeout(function() {
     $('#alert').fadeOut(1000); // Исчезновение за 1 секунду (1000 миллисекунд)
 }, 3000);
@@ -52,6 +50,15 @@ window.ajaxRedirectForm = function ajaxRedirectForm(form_id = '', route = '', me
         ajaxRequest(method, route, formData, function (response) {
             window.location.href = response.redirect
         })
+    });
+}
+
+window.ajaxSimpleRequest = function ajaxSimpleRequest(form_id = '', route = '', method = 'POST') {
+    $(`#${form_id}`).on('submit', function() {
+        event.preventDefault();
+        const formData = $(this).serialize();
+
+        ajaxRequest(method, route, formData, function (response) {}, function (response) {})
     });
 }
 

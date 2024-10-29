@@ -5,9 +5,17 @@
             </div>
 
             <div class="d-flex align-items-center gap-3 me-5">
-                <button id="theme-toggle" class="nav-link">
-                    <i id="theme-icon" class="fas"></i>
-                </button>
+                <x-form id="theme-form" method="POST" action="{{ route('changeTheme') }}">
+                    <button id="theme-toggle" type="submit" class="nav-link">
+                        <i id="theme-icon" class="fas {{ $theme_icon }}"></i>
+                    </button>
+                </x-form>
             </div>
         </div>
 </footer>
+
+@push('js')
+    <script type="module">
+        ajaxSimpleRequest('theme-form', '{{ route('changeTheme') }}')
+    </script>
+@endpush

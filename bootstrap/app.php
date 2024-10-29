@@ -3,6 +3,7 @@
 use App\Http\Middleware\ActiveMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\LogMiddleware;
+use App\Http\Middleware\ThemeMiddleware;
 use App\Http\Middleware\TokenMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -24,6 +25,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'active' => ActiveMiddleware::class,
             'is_admin' => AdminMiddleware::class,
             'token' => TokenMiddleware::class,
+        ]);
+        $middleware->web(append: [
+            ThemeMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

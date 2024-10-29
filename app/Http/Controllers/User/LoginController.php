@@ -32,10 +32,8 @@ class LoginController extends Controller
             $status = 200;
         }
         else {
-            $data = ['errors' => [
-                    'email' => [__('Email или пароль неверен')]
-                ]
-            ];
+            $data = ['message' => __('Email или пароль неверен')];
+            $data['errors']['email'][] = __('Email или пароль неверен');
             $status = 422;
         }
         return response()->json($data, $status);

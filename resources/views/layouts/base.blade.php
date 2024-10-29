@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en" data-bs-theme="{{ $theme }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('page.title', config('app.name'))</title>
-
     @vite(['resources/js/app.js', 'resources/css/app.css'])
     @stack('css')
 </head>
@@ -20,12 +19,6 @@
 
     @include('includes.footer')
 </div>
-
 @stack('js')
-
-<script>
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-bs-theme', savedTheme);
-</script>
 </body>
 </html>
