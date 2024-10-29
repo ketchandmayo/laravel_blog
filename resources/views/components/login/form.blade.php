@@ -19,7 +19,7 @@
             <x-form id="login-form" action="{{ route('login.store') }}" method="POST">
                 <x-form-item>
                     <x-label required>{{__('Email')}}</x-label>
-                    <x-input type="email" name="email" autofocus required />
+                    <x-input type="text" name="email" autofocus />
                     <x-error name="email" />
                 </x-form-item>
                 <x-form-item>
