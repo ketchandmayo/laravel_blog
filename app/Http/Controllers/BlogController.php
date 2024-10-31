@@ -21,13 +21,16 @@ class BlogController extends Controller
 
         $query = Post::query();
 
-        if(isset($validated['user_id']))
-            $query->where('user_id', $validated['user_id']);
-        if(isset($validated['search']))
-            Post::postSearch($query, $validated);
-
         $query
             ->whereNotNull('published')
+            ->when(isset($validated['user_id']),
+                function ($query) use ($validated) {
+                $query->where('user_id', $validated['user_id']);
+            })
+            ->when(isset($validated['search']),
+                function ($query) use ($validated) {
+                Post::postSearch($query, $validated);
+            })
             ->latest('published_at')
             ->oldest('id');
 
