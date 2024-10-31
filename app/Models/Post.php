@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 class Post extends Model
 {
@@ -47,4 +48,14 @@ class Post extends Model
     {
         return ($this->published && $this->published_at);
     }
+
+    public static function postSearch($query, $validated): void
+    {
+        $query->where(function ($query) use ($validated) {
+            $query
+                ->whereLike('title', "%{$validated['search']}%")
+                ->orWhereLike('content', "%{$validated['search']}%");
+        });
+    }
+
 }

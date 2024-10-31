@@ -13,19 +13,21 @@ class BlogController extends Controller
             [
                 'limit' => ['nullable', 'integer', 'min:1', 'max:99'],
                 'page' => ['nullable', 'integer', 'min:1', 'max:100'],
+                'search' => ['nullable', 'string', 'min:1', 'max:255'],
+                'user_id' => ['nullable', 'integer'],
             ]
         );
         $limit = $validated['limit'] ?? 12;
 
-        $user_id = $request->input('user_id');
-        $search = $request->input('search');
-
         $query = Post::query();
-        if($user_id)
-            $query->where('user_id', $user_id);
-        $query->where([
-                'published' => true,
-            ])
+
+        if(isset($validated['user_id']))
+            $query->where('user_id', $validated['user_id']);
+        if(isset($validated['search']))
+            Post::postSearch($query, $validated);
+
+        $query
+            ->whereNotNull('published')
             ->latest('published_at')
             ->oldest('id');
 
