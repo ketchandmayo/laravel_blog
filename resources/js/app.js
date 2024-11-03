@@ -2,8 +2,8 @@ import './theme.js';
 //<script type="module">
 import 'bootstrap'
 import $ from 'jquery';
-
 window.$ = window.jQuery = $;
+
 import './bootstrap';
 setTimeout(function() {
     $('#alert').fadeOut(1000); // Исчезновение за 1 секунду (1000 миллисекунд)

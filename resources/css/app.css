@@ -1,5 +1,7 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import '@fortawesome/fontawesome-free/css/all.css';
 
+@import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css';
+
 .container { max-width: 1080px; }
 .required:after { content: '*'; color: red; margin-left: 3px; }
