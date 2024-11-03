@@ -1,9 +1,10 @@
-//<script type="module">
-
-window.$ = window.jQuery = $;
-import './bootstrap';
 import './theme.js';
+//<script type="module">
+import 'bootstrap'
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 
+import './bootstrap';
 setTimeout(function() {
     $('#alert').fadeOut(1000); // Исчезновение за 1 секунду (1000 миллисекунд)
 }, 3000);
@@ -25,7 +26,7 @@ window.ajaxRequest = function ajaxRequest(method, url, data = {}, successCallbac
             if (typeof errorCallback === 'function') {
                 errorCallback(jqXHR, textStatus, errorThrown);
             } else {
-                if (jqXHR.status === 422) { // Статус 422 для ошибок валидации
+                if (jqXHR.status === 422 || jqXHR.status === 401) { // Статус 422 для ошибок валидации и 401 для ошибок авторизации
                     const errors = jqXHR.responseJSON.errors; // Получаем ошибки валидации
                     $('.error').text(''); // Очищаем предыдущие ошибки
 

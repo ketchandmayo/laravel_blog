@@ -26,7 +26,7 @@
 
     <x-form-item>
         <x-label>{{__('Дата публикации')}}</x-label>
-        <x-input name="published_at" value="" value="{{dateOrNull($post->published_at) ?? ''}}" placeholder="{{ now()->format('d.m.Y') }}" />
+        <x-datepicker name="published_at" value="" value="{{dateOrNull($post->published_at) ?? ''}}" placeholder="{{ now()->format('d.m.Y') }}" />
         <x-error name="published_at" />
     </x-form-item>
 

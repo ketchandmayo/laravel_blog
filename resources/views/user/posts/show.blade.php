@@ -20,7 +20,11 @@
 
     {!! $post->content !!}
     <div class="small text-muted mt-3">
-        {{ now()->format('d.m.Y H:i') }}
+        {{ now()->translatedFormat('d F Y') }}
+    </div>
+    <br>
+    <div class="small text-muted mt-3">
+        {{ __('Создан: ') }} {{ $post->created_at->translatedFormat('d F Y H:i') }}
     </div>
 
 @endsection
